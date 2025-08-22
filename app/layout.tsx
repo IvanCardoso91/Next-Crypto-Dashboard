@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import Providers from "./providers";
-import ThemeToggle from "@/app/components/theme-toggle";
 
 export const metadata: Metadata = {
   title: "Crypto Dashboard",
