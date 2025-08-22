@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🪙 Next Crypto Dashboard
 
-## Getting Started
+Aplicação desenvolvida em **Next.js 15 + TypeScript** que consome a API da [CoinGecko](https://www.coingecko.com/api/documentation) para exibir as **20 maiores criptomoedas por market cap**, com busca e detalhes (incluindo gráfico de 7 dias).
 
-First, run the development server:
+👉 Deploy em produção: [https://next-crypto-dashboard-eta.vercel.app](https://next-crypto-dashboard-eta.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Tecnologias
+
+- [Next.js 15 (App Router)](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [SWR](https://swr.vercel.app/) para cache client-side
+- [Recharts](https://recharts.org/) para visualização gráfica
+- [Jest](https://jestjs.io/) + [Testing Library](https://testing-library.com/) para testes unitários
+- [Playwright](https://playwright.dev/) para testes E2E
+- [Docker](https://www.docker.com/) para containerização
+- Deploy via [Vercel](https://vercel.com/)
+
+---
+
+## ✨ Funcionalidades
+
+- 📊 **Listagem das Top 20 criptomoedas** por market cap  
+- 🔍 **Busca em tempo real** por nome ou símbolo  
+- 📈 **Página de detalhes da moeda**, com gráfico de variação em 7 dias  
+- ⚡ **SSR + CSR combinados**: páginas de listagem/detalhes com cache e SWR no client  
+- 🛡️ **Error Boundaries** e loading states  
+- 📱 **Layout responsivo**  
+- ✅ **Testes unitários e E2E** configurados  
+- 🔑 Suporte a **API Key da CoinGecko** via `CG_API_KEY`  
+
+---
+
+## 📂 Estrutura
+
+```
+app/
+ ├─ page.tsx                # Dashboard (Top 20)
+ ├─ coin/[id]/page.tsx      # Detalhes da moeda
+ ├─ api/market-chart/[id]/  # Proxy server-side para gráfico
+ ├─ components/             # Componentes compartilhados
+lib/
+ ├─ coingecko.ts            # Client para API CoinGecko
+ ├─ format.ts               # Helpers de formatação
+types/
+ ├─ coin.ts                 # Tipos de moedas/market chart
+tests/                      # Testes unitários (Jest)
+e2e/                        # Testes end-to-end (Playwright)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧑‍💻 Como rodar localmente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clonar repositório
+```bash
+git clone https://github.com/seuuser/next-crypto-dashboard.git
+cd next-crypto-dashboard
+```
 
-## Learn More
+### 2. Instalar dependências
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Configurar variáveis de ambiente
+Crie `.env.local` na raiz:
+```bash
+CG_API_KEY=coloque_sua_chave_da_coingecko
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Rodar em dev
+```bash
+pnpm dev
+```
+Acesse [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧪 Testes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Unitários (Jest)
+```bash
+pnpm test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### End-to-End (Playwright)
+```bash
+pnpm e2e
+# ou interface interativa
+pnpm e2e:ui
+```
+
+---
+
+## 🐳 Docker
+
+Buildar e rodar container:
+```bash
+docker build -t crypto-dashboard .
+docker run -p 3000:3000 crypto-dashboard
+```
+
+---
+
+## ⚙️ CI/CD
+
+- **GitHub Actions**: roda unit + e2e + build a cada PR/push  
+- **Vercel**: deploy automático em Preview (PR) e Production (main/master)  
+- **Secrets**: `CG_API_KEY` configurada no GitHub e Vercel  
+
+---
+
+## 🌐 Deploy
+
+Aplicação está rodando em:  
+👉 [https://next-crypto-dashboard-eta.vercel.app](https://next-crypto-dashboard-eta.vercel.app)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](./public/screenshot-dashboard.png)
+
+### Detalhes
+![Detalhes](./public/screenshot-coin.png)
+
+---
+
+## 📜 Licença
+MIT — fique à vontade para usar e modificar.
