@@ -15,7 +15,8 @@ export async function GET(
                 'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=600',
             },
         });
-    } catch (e: any) {
-        return NextResponse.json({ error: e?.message ?? 'fetch_failed' }, { status: 500 });
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'fetch_failed';
+        return NextResponse.json({ error: message }, { status: 500 });
     }
 }

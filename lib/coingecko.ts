@@ -27,7 +27,7 @@ export async function fetchTop20() {
 }
 
 export async function fetchCoin(id: string) {
-    return getJSON<any>(`${BASE}/coins/${id}`, { next: { revalidate: 60 } });
+    return getJSON<import('@/types/coin').CoinDetail>(`${BASE}/coins/${id}`, { next: { revalidate: 60 } });
 }
 
 export async function fetchMarketChart7d(id: string) {
